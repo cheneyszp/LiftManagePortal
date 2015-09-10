@@ -1,0 +1,72 @@
+﻿@model LiftManagePortal.Models.StatusLog
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>StatusLog</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DeviceId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeviceId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CPUUsage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CPUUsage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiskUsage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiskUsage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MemoryUsage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MemoryUsage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EventEnqueuedUtcTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EventEnqueuedUtcTime)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

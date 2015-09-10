@@ -1,0 +1,67 @@
+﻿@model LiftManagePortal.Models.StatusLog
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>StatusLog</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DeviceId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeviceId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CPUUsage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CPUUsage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiskUsage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiskUsage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MemoryUsage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MemoryUsage)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EventEnqueuedUtcTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EventEnqueuedUtcTime)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.StatusLogId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

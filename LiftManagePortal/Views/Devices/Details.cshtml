@@ -1,0 +1,58 @@
+﻿@model LiftManagePortal.Models.Device
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Device</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LiftNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LiftNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Location)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Location)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OwerName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OwerName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OwerPhonenum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OwerPhonenum)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.DeviceId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

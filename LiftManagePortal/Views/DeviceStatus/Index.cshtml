@@ -1,0 +1,60 @@
+﻿@model IEnumerable<LiftManagePortal.Models.DeviceStatus>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>该表由发送到EventHub的数据进行更新，维护了所有设备的状态信息。</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DeviceId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CPUUsage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DiskUsage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MemoryUsage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EventEnqueuedUtcTime)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DeviceId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CPUUsage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DiskUsage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MemoryUsage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EventEnqueuedUtcTime)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.DeviceId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.DeviceId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.DeviceId })
+        </td>
+    </tr>
+}
+
+</table>

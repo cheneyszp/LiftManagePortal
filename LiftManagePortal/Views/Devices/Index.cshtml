@@ -1,0 +1,63 @@
+﻿@model IEnumerable<LiftManagePortal.Models.Device>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>该表由外部导入或者人工录入，维护了所有设备的详细信息。</h2>
+
+<p>
+    @Html.ActionLink("录入新的新的设备信息", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DeviceId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CustomerName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LiftNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Location)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OwerName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OwerPhonenum)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DeviceId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustomerName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LiftNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Location)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OwerName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OwerPhonenum)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.DeviceId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.DeviceId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.DeviceId })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,156 @@
+﻿@model LiftManagePortal.Models.DeviceStatus
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>DeviceStatus</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+        @Html.DisplayNameFor(model => model.CPUUsage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CPUUsage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiskUsage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiskUsage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MemoryUsage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MemoryUsage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EventEnqueuedUtcTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EventEnqueuedUtcTime)
+        </dd>
+
+    </dl>
+</div>
+<div>
+    <h2>现在灯的状态</h2>
+    <ul id="status" />
+</div>
+<div>
+
+    <h2>设置当前灯的状态</h2>
+    <select id="input">
+        <option value="白光">白光</option>
+        <option value="红光">红光</option>
+        <option value="绿光">绿光</option>
+        <option value="蓝光">蓝光</option>
+        <option value="浅蓝">浅蓝</option>
+        <option value="粉光">粉光</option>
+        <option value="黄光">黄光</option>
+        <option value="关灯">关灯</option>
+    </select>
+    <input type="button" value="设置" onclick="find();" />
+
+
+    <p id="info" />
+
+</div>
+
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+<script>
+
+    $(document).ready(function () {
+
+        // Send an AJAX request
+        var uri = 'http://controlmyled.azurewebsites.net/LightStatus/GetNowStatus';
+        $('#info').text("正在获取灯的当前状态。。。请稍等。。。");
+        $.get(uri)
+          .done(function (data) {
+              $('#status').text('现在状态：' + data);
+              $("#input").val(data);
+              $('#info').text("已获取到灯的状态。");
+          })
+          .fail(function (jqXHR, textStatus, err) {
+              $('#info').text('获取参数失败！' + err);
+
+          });
+
+    });
+
+    function formatItem(item) {
+        return item.pin_r + ' ' + item.pin_g + ' ' + item.pin_b;
+    }
+
+    function find() {
+        var pin_r = 0;
+        var pin_g = 0;
+        var pin_b = 0;
+
+        var led_color = parseInt($('#input').get(0).selectedIndex);
+        switch (led_color)
+        {
+            case 0: pin_r = 0; pin_g = 0; pin_b = 0; break;
+            case 1: pin_r = 0; pin_g = 1; pin_b = 1; break;
+            case 2: pin_r = 1; pin_g = 0; pin_b = 1; break;
+            case 3: pin_r = 1; pin_g = 1; pin_b = 0; break;
+            case 4: pin_r = 1; pin_g = 0; pin_b = 0; break;
+            case 5: pin_r = 0; pin_g = 1; pin_b = 0; break;
+            case 6: pin_r = 0; pin_g = 0; pin_b = 1; break;
+            case 7: pin_r = 1; pin_g = 1; pin_b = 1; break;
+            default: pin_r = 0; pin_g = 0; pin_b = 0; break;
+        }
+
+        $('#info').text("正在设置灯的状态。。。请稍等。。。");
+        var uri = 'http://controlmyled.azurewebsites.net/LightStatus/Update';
+        $.get(uri + '/' + pin_r +"/" +pin_g+ "/"+ pin_b)
+          .done(function (data) {
+              $('#info').text(data);
+
+              var uri = 'http://controlmyled.azurewebsites.net/LightStatus/GetNowStatus';
+
+              $.get(uri)
+                .done(function (data) {
+                    $('#status').text('现在状态：' + data);
+                    $("#input").val(data);
+                    $('#info').text("已获取到灯的状态。");
+                })
+                .fail(function (jqXHR, textStatus, err) {
+                    $('#info').text('获取参数失败！' + err);
+
+                });
+          })
+          .fail(function (jqXHR, textStatus, err) {
+              $('#info').text('设置失败！'+err);
+
+          });
+        // URL: LightStatus/Update/0/0/1
+
+
+
+    }
+</script>
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.DeviceId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
